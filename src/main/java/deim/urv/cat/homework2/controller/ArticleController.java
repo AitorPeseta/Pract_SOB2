@@ -4,7 +4,7 @@ import deim.urv.cat.homework2.exception.Exception400;
 import deim.urv.cat.homework2.exception.Exception404;
 import deim.urv.cat.homework2.model.Article;
 import deim.urv.cat.homework2.service.ArticleService;
-
+import deim.urv.cat.homework2.exception.*;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;

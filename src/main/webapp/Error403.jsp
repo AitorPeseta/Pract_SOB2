@@ -36,10 +36,10 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card shadow-lg border-0 rounded-lg mt-5 mx-auto" style="width: 30rem;">
                     <h3 class="card-header display-1 text-muted text-center">
-                        404
+                        403
                     </h3>
                     <span class="card-subtitle mb-2 text-muted text-center">
-                        Page Could Not Be Found 
+                        Without authority
                     </span>
 
                      <div class="card-body mx-auto">
