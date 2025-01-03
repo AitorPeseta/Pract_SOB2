@@ -1,10 +1,8 @@
 package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.Article;
-import jakarta.ws.rs.client.WebTarget;
+import deim.urv.cat.homework2.exception.*;
 import java.util.List;
-import deim.urv.cat.homework2.controller.ArticleForm;
-import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
@@ -23,42 +21,101 @@ public class ArticleServiceImpl implements ArticleService{
         webTarget = client.target(BASE_URI).path("article");
     }
     
-    public List<Article> findArticleByTopicAuthor(List<Integer> topics, int author){
+    @Override
+    public List<Article> findArticleByTopicAuthor(List<Integer> topics, String author) throws Exception{
         
-        String topicsString,authorString;
-        try{
-            // Formatear la lista de tópicos como un string separado por comas
-            topicsString = String.join(",", topics.stream().map(String::valueOf).toArray(String[]::new));
-        }catch(NullPointerException e){
-            topicsString = ""; 
+        // Agregar parámetros "topic" dinámicamente
+        if (topics != null && !topics.isEmpty()) {
+            for (Integer topic : topics) {
+                webTarget = webTarget.queryParam("topic", topic);
+            }
         }
-        
-        if(author == 0)
-            authorString = "";
-        else 
-            authorString = "" + author; 
+       
+        // Agregar el parámetro "author" si es proporcionado
+        if (author != null) {
+            webTarget = webTarget.queryParam("author", author);
+        }
         
         // Construir el target de la URL
-        Response response = webTarget
-                .queryParam("topic", topicsString)
-                .queryParam("author", authorString)
-                .request(MediaType.APPLICATION_JSON)
-                .get();
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                                     .get();
         
-        // Realizar la petición GET
-        //Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
-        if (response.getStatus() == 200) {
-            return response.readEntity(new GenericType<List<Article>>() {});
+        
+        switch (response.getStatus()) {
+            case 200:
+                return response.readEntity(new GenericType<List<Article>>() {});
+            case 404:
+                throw new Exception404("");
+            case 400:
+                throw new Exception400("");
+            default:
+                break;
         }
+        
         return null;
     }
-    public int findArticleById(String id){
-        return 0;
-    }
-    public void deleteArticle(String id){
     
+    @Override
+    public Article findArticleById(String id) throws Exception {
+        
+        Response response = webTarget.queryParam("id", id)
+                                     .request(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+                                     .get();
+       
+        switch (response.getStatus()) {
+            case 200:
+                return response.readEntity(Article.class);
+            case 404:
+                throw new Exception404("");
+            case 400:
+                throw new Exception400("");
+            default:
+                break;
+        }
+        
+        return null;
     }
-    public void createArticle(Article article){
     
+    @Override
+    public boolean deleteArticle(String id) throws Exception{
+         
+        Response response = webTarget.queryParam("id", id)
+                                     .request(MediaType.APPLICATION_JSON)
+                                     .delete();
+        
+        switch (response.getStatus()) {
+            case 204:
+                return true;
+            case 404:
+                throw new Exception404("");
+            case 400:
+                throw new Exception400("");
+            case 403:
+                throw new Exception403("");
+            default:
+                break;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean createArticle(Article article) throws Exception{
+        Response response = webTarget.request(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+               .post(Entity.entity(article, MediaType.APPLICATION_JSON), 
+                    Response.class);
+        
+        switch (response.getStatus()) {
+            case 201:
+                return true;
+            case 404:
+                throw new Exception404("");
+            case 400:
+                throw new Exception400("");
+            case 500:
+                throw new Exception500("");
+            default:
+                break;
+        }
+        return false;
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 
 public interface ArticleService {
-    public List<Article> findArticleByTopicAuthor(List<Integer> topics, int author);
-    public int findArticleById(String id);
-    public void deleteArticle(String id);
-    public void createArticle(Article article);
+    public List<Article> findArticleByTopicAuthor(List<Integer> topics, String author) throws Exception;
+    public Article findArticleById(String id) throws Exception;
+    public boolean deleteArticle(String id) throws Exception;
+    public boolean createArticle(Article article) throws Exception;
 }
