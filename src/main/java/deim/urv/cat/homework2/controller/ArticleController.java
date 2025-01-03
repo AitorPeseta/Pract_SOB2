@@ -1,5 +1,7 @@
 package deim.urv.cat.homework2.controller;
 
+import deim.urv.cat.homework2.exception.Exception400;
+import deim.urv.cat.homework2.exception.Exception404;
 import deim.urv.cat.homework2.model.Article;
 import deim.urv.cat.homework2.service.ArticleService;
 
@@ -17,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-@Path("articles")
+@Path("Articles")
 public class ArticleController {
 
     @Inject ArticleService articleService;
@@ -25,19 +27,22 @@ public class ArticleController {
     @Inject Logger log;
 
 
-        @GET
-    public String showArticlesPage() {
+    @GET
+    public String showArticlesPage() throws Exception {
         try {
             // Cargar los primeros artículos (página inicial)
-            List<Article> articles = articleService.findArticleByTopicAuthor(null, 0); // Vacío en lugar de null
-            if(articles == null) System.out.print("ESTOY VACIO OSTIAAA");
+            List<Article> articles = articleService.findArticleByTopicAuthor(null, null); // Vacío en lugar de null
             models.put("articles", articles);
             models.put("page", 0); // Página inicial
-        } catch (Exception e) {
+        } catch (Exception404 e) {
             // Manejo de errores: agregar un mensaje de error al modelo
-            models.put("error", "No se pudieron cargar los artículos. Por favor, inténtelo de nuevo más tarde.");
-            return "error.jsp"; // Mostrar página de error
-        }
+            models.put("error", "No se ha encontrado el artículo.");
+            return "error404.jsp"; // Mostrar página de error
+        } catch (Exception400 e) {
+            // Manejo de errores: agregar un mensaje de error al modelo
+            models.put("error", "Los parámetros que nos has proporcionado son incorrectos.");
+            return "error400.jsp"; // Mostrar página de error
+        } 
         return "article_page.jsp";
     }
 

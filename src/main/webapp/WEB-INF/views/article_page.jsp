@@ -11,8 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos Recientes</title>
     <link rel="stylesheet" href="../resources/css/styles.css">
+    <link rel="stylesheet" href="../resources/css/stylesini.css">
 </head>
 <body>
+    <jsp:include page="/login_bar.jsp" />
     <div class="container">
         <header>
             <h1>Artículos Recientes</h1>
@@ -47,7 +49,7 @@
             </c:forEach>
         </main>
         <footer>
-            <p>&copy; 2025 Tu Sitio Web</p>
+            <p>&copy; 2025 Aitor&Xavi</p>
         </footer>
     </div>
 </body>
