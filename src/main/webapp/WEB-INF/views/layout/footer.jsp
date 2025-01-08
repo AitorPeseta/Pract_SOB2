@@ -4,7 +4,7 @@
         <div class="container">
             <div class="text-center">
                 <strong>Copyright@</strong>
-                <span class="text-muted">Marc Sanchez marc.sanchez@urv.cat</span>
+                <span class="text-muted">Aitor&Xavi</span>
             </div>
         </div>
 </footer>

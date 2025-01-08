@@ -12,6 +12,11 @@ import deim.urv.cat.homework2.model.Article;
 
 public class TopicForm {
     
+    
+    @NotNull(message = "Id must not be null")
+    @FormParam("id")
+    private int id;
+    
     @NotBlank(message = "Name must not be blank")
     @Size(max = 50, message = "Name must not exceed 50 characters")
     @FormParam("name")
@@ -25,6 +30,14 @@ public class TopicForm {
 
     // Getters and Setters
 
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return fixNull(name);
     }

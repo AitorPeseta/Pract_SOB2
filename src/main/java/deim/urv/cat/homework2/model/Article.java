@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Article {
    
+    private int id;
+    
     private String content;
 
     private String featuredImageUrl;
@@ -25,10 +27,18 @@ public class Article {
 
     private Customer author;
 
-    private List<Topic> topics;
+    private List<Topic> topic;
 
     // Getters and Setters with `fixNull` for safe access
    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getContent() {
         return fixNull(content);
     }
@@ -93,12 +103,12 @@ public class Article {
         this.author = author;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public List<Topic> getTopic() {
+        return topic;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setTopic(List<Topic> topics) {
+        this.topic = topics;
     }
 
     private String fixNull(String in) {

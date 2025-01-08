@@ -1,3 +1,11 @@
+
+/* Aplica a todos los enlaces que contengan elementos con clase "article-title" */
+a {
+    text-decoration: none; /* Elimina el subrayado de todos los enlaces */
+    color: inherit; /* Usa el color del texto del contenedor */
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -65,6 +73,24 @@ header h1 {
     margin: 0;
     color: #212529;
     margin-bottom: 5px;
+}
+
+/* Opcional: Cambia el color al pasar el mouse */
+a:hover {
+    color: #3498db; /* Cambia el color cuando pases el mouse */
+    text-decoration: none; /* Asegúrate de que no reaparezca el subrayado */
+}
+
+/* Si quieres aplicar específicamente solo a los títulos */
+a .article-title {
+    text-decoration: none; /* Elimina el subrayado del texto del título */
+    color: inherit; /* Asegúrate de que hereda el color */
+}
+
+/* Al pasar el mouse por el título */
+a:hover .article-title {
+    color: #3498db; /* Cambia el color al pasar el mouse */
+    text-decoration: none; /* Sin subrayado */
 }
 
 .article-meta {

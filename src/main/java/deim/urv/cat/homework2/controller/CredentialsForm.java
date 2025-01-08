@@ -8,6 +8,11 @@ import jakarta.ws.rs.FormParam;
 import jakarta.validation.constraints.*;
 
 public class CredentialsForm {
+    
+    @NotNull(message = "Id must not be null")
+    @FormParam("id")
+    private int id;
+    
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 8, message = "Password must have at least 8 characters")
     @FormParam("password")
@@ -22,6 +27,14 @@ public class CredentialsForm {
 
     // Getters and Setters
    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getPassword() {
         return fixNull(password);
     }

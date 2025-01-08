@@ -6,12 +6,22 @@ package deim.urv.cat.homework2.model;
 
 public class Credentials {
    
+    private int id;
+    
     private String password;
 
     private String username;
 
     // Getters and Setters
    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getPassword() {
         return fixNull(password);
     }

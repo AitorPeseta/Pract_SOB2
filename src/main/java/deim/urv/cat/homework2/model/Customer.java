@@ -10,11 +10,15 @@ import java.util.List;
 
 public class Customer {
     
+    private int id;
+    
     private String email;
 
     private Boolean isAuthor;
 
     private Long lastArticleId; // For HATEOAS
+    
+    private String perfil;
 
     private Date registrationDate = new Date();
 
@@ -23,6 +27,15 @@ public class Customer {
     private List<Article> articles;
 
     // Getters and Setters with `fixNull` and safe access
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getEmail() {
         return fixNull(email);
     }
@@ -45,6 +58,14 @@ public class Customer {
 
     public void setLastArticleId(Long lastArticleId) {
         this.lastArticleId = lastArticleId;
+    }
+    
+    public String getPerfil() {
+        return perfil;
+    }
+    
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public Date getRegistrationDate() {

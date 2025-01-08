@@ -21,14 +21,18 @@ import deim.urv.cat.homework2.model.Customer;
 @RequestScoped
 public class ArticleForm implements Serializable{
     private static final long serialVersionUID = 1L;
-
+    
+    @NotNull(message = "Id must not be null")
+    @FormParam("id")
+    private int id;
+    
     @NotBlank(message = "Content must not be blank")
     @Size(max = 5000, message = "Content must be less than 5000 characters")
     @FormParam("content")
     private String content;
 
     @FormParam("featuredImageUrl")
-    @Pattern(regexp = "(http|https)://.*", message = "Image URL must be valid")
+    //@Pattern(regexp = "(http|https)://.*", message = "Image URL must be valid")
     private String featuredImageUrl;
 
     @NotNull
@@ -63,6 +67,15 @@ public class ArticleForm implements Serializable{
     private List<Topic> topics;
 
     // Getters and Setters with `fixNull` for safe access
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getContent() {
         return fixNull(content);
     }

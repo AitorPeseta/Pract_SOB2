@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign Up Success - SOB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Success</title>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
     rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
@@ -18,17 +19,17 @@
             border: none;
             border-radius: 8px; /* Bordes redondeados */
             padding: 10px 20px; /* Espaciado interno */
-            font-size: 16px; /* Tamaño del texto */
+            font-size: 16px; /* TamaÃ±o del texto */
             font-weight: bold; /* Texto en negrita */
             cursor: pointer; /* Cambia el cursor al pasar por encima */
             text-align: center; /* Centrado del texto */
             position: absolute; /* Posicionamiento absoluto */
-            right: 20px; /* Separación del lado derecho */
-            bottom: 20px; /* Separación de la parte inferior */
+            right: 20px; /* SeparaciÃ³n del lado derecho */
+            bottom: 20px; /* SeparaciÃ³n de la parte inferior */
         }
         
         .volver-btn:hover {
-            background-color: #1a4fb8; /* Color más oscuro al pasar el ratón */
+            background-color: #1a4fb8; /* Color mÃ¡s oscuro al pasar el ratÃ³n */
         }
         
 </style>
@@ -37,17 +38,17 @@
 <body>
     <div class="container">
         <div class="col-md-offset-2 col-md-7">
-            <h1>Gràcies per registrar-te!</h1>
+            <h1>Benvingut! ${customer.credenciales.username}</h1>
             <hr />
                         <p class="text-md-start">
-                            Ara pots gaudir dels nostres articles més famosos, i dels articles privats!
+                            Ara pots gaudir dels nostres articles mes famosos, i dels articles privats!
                         </p>
             <table class="table table-striped table-bordered">
                 <tr>
-                    <td><b>Username </b>: ${user.credenciales.username}</td>
+                    <td><b>First Name </b>: ${customer.credenciales.username}</td>
                 </tr>
                 <tr>
-                    <td><b>Email </b>: ${user.email}</td>
+                    <td><b>Email </b>: ${customer.email}</td>
                 </tr>
             </table>
         </div>

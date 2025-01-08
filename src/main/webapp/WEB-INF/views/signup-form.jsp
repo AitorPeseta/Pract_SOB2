@@ -15,11 +15,34 @@
           rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"/>
+
+    <style>
+        .volver-btn {
+            background-color: #2a6edf; /* Color azul */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Bordes redondeados */
+            padding: 10px 20px; /* Espaciado interno */
+            font-size: 16px; /* Tamaño del texto */
+            font-weight: bold; /* Texto en negrita */
+            cursor: pointer; /* Cambia el cursor al pasar por encima */
+            text-align: center; /* Centrado del texto */
+            position: absolute; /* Posicionamiento absoluto */
+            right: 20px; /* Separación del lado derecho */
+            bottom: 20px; /* Separación de la parte inferior */
+        }
+        
+        .volver-btn:hover {
+            background-color: #1a4fb8; /* Color más oscuro al pasar el ratón */
+        }
+        
+</style>
+
 </head>
 <body>
 	<div class="container">
 		<div class="col-md-offset-2 col-md-7">
-			<h2 class="text-center">Skeleton Structure for Homework 2</h2>
+			<h2 class="text-center">Registre a l'aplicació</h2>
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">Sign Up</div>
@@ -28,24 +51,22 @@
 					<form action="${mvc.uri('sign-up')}" class="form-horizontal" method="POST">
                                                 <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
 						<div class="form-group">
-							<label for="firstname" class="col-md-3 control-label">First
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="firstName" value="${user.firstName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="lastname" class="col-md-3 control-label">Last
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="lastName" value="${user.lastName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="email" class="col-md-3 control-label">Email</label>
 							<div class="col-md-9">
                                                             <input type="text" name="email" value="${user.email}" class="form-control" />
 							</div>
+						</div>
+                                                <div class="form-group">
+							<label for="username" class="col-md-3 control-label">Username</label>
+							<div class="col-md-9">
+                                                            <input type="text" name="username" value="${user.credenciales.username}" class="form-control" />
+							</div>
+						</div>
+                                                <div class="form-group">
+                                                        <label for="password" class="col-md-3 control-label">Password</label>
+                                                        <div class="col-md-9">
+                                                            <input type="password" name="password" value="${user.credenciales.password}" class="form-control" />
+                                                        </div>
 						</div>
 						<div class="form-group">
 							<!-- Button -->
@@ -85,5 +106,10 @@
 		</div>
 	</div>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+        <div>
+            <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">
+            Volver
+            </button>
+        </div>
 </body>
 </html>

@@ -13,7 +13,7 @@
         <div class="login-text">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    Bienvenido, ${sessionScope.user.username}!
+                    Bienvenido ${sessionScope.user.username}!
                 </c:when>
                 <c:otherwise>
                     No has iniciado sesión.
@@ -25,15 +25,15 @@
         <div class="login-buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <form action="/Pract_SOB2/Web/Logout" method="post" style="margin: 0;">
+                    <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
                         <button type="submit">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form action="/Pract_SOB2/Web/Login" method="get" style="margin: 0;">
+                    <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
                         <button type="submit" >Iniciar Sesión</button>
                     </form>
-                    <form action="/Pract_SOB2/Web/SignUp" method="get" style="margin: 0;">
+                    <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
                         <button type="submit" >Registrarse</button>
                     </form>
                 </c:otherwise>

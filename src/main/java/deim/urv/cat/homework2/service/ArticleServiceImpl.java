@@ -39,7 +39,7 @@ public class ArticleServiceImpl implements ArticleService{
         // Construir el target de la URL
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
                                      .get();
-        
+       
         
         switch (response.getStatus()) {
             case 200:
@@ -58,10 +58,11 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public Article findArticleById(String id) throws Exception {
         
-        Response response = webTarget.queryParam("id", id)
-                                     .request(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+        
+        Response response = webTarget.path(id)
+                                     .request(MediaType.APPLICATION_JSON)
                                      .get();
-       
+                       
         switch (response.getStatus()) {
             case 200:
                 return response.readEntity(Article.class);
@@ -79,7 +80,7 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public boolean deleteArticle(String id) throws Exception{
          
-        Response response = webTarget.queryParam("id", id)
+        Response response = webTarget.path(id)
                                      .request(MediaType.APPLICATION_JSON)
                                      .delete();
         
@@ -100,7 +101,7 @@ public class ArticleServiceImpl implements ArticleService{
     
     @Override
     public boolean createArticle(Article article) throws Exception{
-        Response response = webTarget.request(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
                .post(Entity.entity(article, MediaType.APPLICATION_JSON), 
                     Response.class);
         

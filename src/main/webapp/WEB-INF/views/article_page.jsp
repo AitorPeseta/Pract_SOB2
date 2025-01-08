@@ -14,7 +14,38 @@
     <link rel="stylesheet" href="../resources/css/stylesini.css">
 </head>
 <body>
-    <jsp:include page="/login_bar.jsp" />
+    <div class="login-bar">
+        <!-- Texto de la izquierda -->
+        <div class="login-text">
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    Bienvenido, ${sessionScope.username}
+                </c:when>
+                <c:otherwise>
+                    No has iniciado sesión.
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <!-- Botones de la derecha -->
+        <div class="login-buttons">
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
+                        <button type="submit">Cerrar Sesión</button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
+                        <button type="submit">Registrarse</button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
     <div class="container">
         <header>
             <h1>Artículos Recientes</h1>
@@ -25,11 +56,18 @@
                     <!-- Sección izquierda -->
                     <div class="article-left">
                         <div class="element-left">
-                            <img class="article-username-left" src="<c:url value="/resources/img/ETSEcentrat.png" />" />
+                            <img class="article-username-left" src="<c:url value="${article.author.perfil}" />" />
                             <p class="article-username-right">${article.author.credenciales.username}</p>
                         </div>
                         <div class="article-details">
-                            <h2 class="article-title">${article.title}</h2>
+                            
+                            <form action="/Homework2/Web/Articles/article-details" class="form-horizontal" method="POST">
+                                <input type="hidden" name="id" value="${article.id}" />
+                                <div class="article-title" style="cursor: pointer;" onclick="this.closest('form').submit();">
+                                    ${article.title}
+                                </div>
+                            </form>
+                            
                             <p class="article-content">${article.summary}</p>
                             <div class="element-left">
                                 <c:if test="${!article.isPublic}">
@@ -43,7 +81,7 @@
                     </div>
                     <!-- Sección derecha -->
                     <div class="article-right">
-                        <img class="article-image" src="<c:url value="/resources/img/ETSEcentrat.png" />" alt="" width="134" height="92" />
+                        <img class="article-image" src="<c:url value="${article.featuredImageUrl}" />" alt="" width="134" height="92" />
                     </div>
                 </div>
             </c:forEach>

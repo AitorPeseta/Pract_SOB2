@@ -14,6 +14,11 @@ import deim.urv.cat.homework2.model.Article;
 import deim.urv.cat.homework2.model.Credentials;
 
 public class CustomerForm {
+    
+    @NotNull(message = "Id must not be null")
+    @FormParam("id")
+    private int id;
+    
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Email should be valid")
     @FormParam("email")
@@ -27,6 +32,10 @@ public class CustomerForm {
     @Min(0)
     @FormParam("lastArticleId")
     private Long lastArticleId; // For HATEOAS
+    
+    @FormParam("perfil")
+    //@Pattern(regexp = "(http|https)://.*", message = "Image URL must be valid")
+    private String perfil;
 
     @PastOrPresent(message = "Registration date cannot be in the future")
     @NotNull(message = "Registration date must not be null")
@@ -42,6 +51,15 @@ public class CustomerForm {
     private List<Article> articles;
 
     // Getters and Setters with `fixNull` and safe access
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getEmail() {
         return fixNull(email);
     }
@@ -64,6 +82,14 @@ public class CustomerForm {
 
     public void setLastArticleId(Long lastArticleId) {
         this.lastArticleId = lastArticleId;
+    }
+    
+    public String getPerfil() {
+        return perfil;
+    }
+    
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public Date getRegistrationDate() {
