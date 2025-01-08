@@ -12,7 +12,11 @@ import java.util.Date;
 import java.util.List;
 import deim.urv.cat.homework2.model.Article;
 import deim.urv.cat.homework2.model.Credentials;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
+@Named("customerForm")
+@RequestScoped
 public class CustomerForm {
     
     @NotNull(message = "Id must not be null")
@@ -22,7 +26,6 @@ public class CustomerForm {
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Email should be valid")
     @FormParam("email")
-    @MvcBinding
     private String email;
 
     @NotNull
@@ -50,6 +53,9 @@ public class CustomerForm {
     @Size(min = 0, message = "Articles list must have at least zero elements")
     private List<Article> articles;
 
+    public CustomerForm(){
+        
+    }
     // Getters and Setters with `fixNull` and safe access
     
     public int getId() {
@@ -117,7 +123,7 @@ public class CustomerForm {
     }
 
     // Helper to prevent null values
-    private String fixNull(String input) {
-        return (input == null) ? "" : input;
+    private String fixNull(String in) {
+        return (in == null) ? "" : in;
     }
 }

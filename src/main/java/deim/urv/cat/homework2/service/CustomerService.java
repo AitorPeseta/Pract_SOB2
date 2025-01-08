@@ -11,6 +11,6 @@ public interface CustomerService {
     public Customer findUserByEmail(String email);
     public Customer findUserByUsername(String username);
     public boolean addUser(CustomerForm customer);
-
+    
 }
 

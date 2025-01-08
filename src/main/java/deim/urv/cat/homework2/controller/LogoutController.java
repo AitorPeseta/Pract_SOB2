@@ -19,7 +19,7 @@ public class LogoutController {
 
     @Context
     private HttpServletRequest request;
-
+    
     @POST
     public String invalidate() {
         // Invalidate HTTP Session
@@ -33,6 +33,6 @@ public class LogoutController {
         }
         session.invalidate();
         return "redirect:/Articles"; 
-    }
-
+    }    
+    
 }
