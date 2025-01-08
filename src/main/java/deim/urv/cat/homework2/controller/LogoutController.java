@@ -4,7 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Context;
 
@@ -20,11 +20,10 @@ public class LogoutController {
     @Context
     private HttpServletRequest request;
     
-    @GET
+    @POST
     public String invalidate() {
         // Invalidate HTTP Session
         HttpSession session = request.getSession();
-        
         Enumeration<String> attributes = request.getSession().getAttributeNames();
         while (attributes.hasMoreElements()) {
             String key = attributes.nextElement();
@@ -33,7 +32,7 @@ public class LogoutController {
                     new Object [] { key, obj });
         }
         session.invalidate();
-        return "redirect:/SignUp"; 
+        return "redirect:/Articles"; 
     }    
     
 }

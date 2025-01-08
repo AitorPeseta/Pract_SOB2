@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign Up Success - SOB</title>
+<title>Login Success</title>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
@@ -18,20 +18,17 @@
                         <div class="text-center">
                             <img class="mb-4" src="<c:url value="/resources/img/ETSEcentrat.png" />" alt="" width="134" height="92" />
                         </div>
-			<h1>Gràcies per registrar-te!</h1>
+			<h1>Benvingut! ${customer.credenciales.username}</h1>
 			<hr />
                         <p class="text-md-start">
                             Ara pots gaudir dels nostres articles més famosos, i dels articles privats!
                         </p>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td><b>First Name </b>: ${user.firstName}</td>
+					<td><b>First Name </b>: ${customer.credenciales.username}</td>
 				</tr>
 				<tr>
-					<td><b>Last Name </b>: ${user.lastName}</td>
-				</tr>
-				<tr>
-					<td><b>Email </b>: ${user.email}</td>
+					<td><b>Email </b>: ${customer.email}</td>
 				</tr>
 			</table>
                         <a class="btn btn-sm btn-info text-white" href="<c:url value="/Web/Articles" />">Go Back</a>

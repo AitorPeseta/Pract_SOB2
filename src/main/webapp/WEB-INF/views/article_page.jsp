@@ -14,7 +14,39 @@
     <link rel="stylesheet" href="../resources/css/stylesini.css">
 </head>
 <body>
-    <jsp:include page="/login_bar.jsp" />
+    <div class="login-bar">
+        <!-- Texto de la izquierda -->
+        <div class="login-text">
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    Bienvenido, ${sessionScope.username}
+                </c:when>
+                <c:otherwise>
+                    No has iniciado sesión.
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <!-- Botones de la derecha -->
+        <div class="login-buttons">
+            <c:choose>
+                <c:when test="${not empty sessionScope.username}">
+                    <form action="/Pract_SOB2/Web/Logout" method="post" style="margin: 0;">
+                        <button type="submit">Cerrar Sesión</button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <form action="/Pract_SOB2/Web/Login" method="get" style="margin: 0;">
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    <form action="/Pract_SOB2/Web/SignUp" method="get" style="margin: 0;">
+                        <button type="submit">Registrarse</button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>Artículos Recientes</h1>
@@ -48,9 +80,7 @@
                 </div>
             </c:forEach>
         </main>
-        <footer>
-            <p>&copy; 2025 Aitor&Xavi</p>
-        </footer>
+        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
     </div>
 </body>
 </html>

@@ -11,4 +11,7 @@ public interface CustomerService {
     public List<Customer> findAllCustomers();
     public Customer findCustomerById(String id);
     public void updateCustomer(int id, Customer updatedCustomer);
+    public Customer findUserByEmail(String email);
+    public Customer findUserByUsername(String username);
+    
 }

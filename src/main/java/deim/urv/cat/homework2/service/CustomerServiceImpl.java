@@ -11,8 +11,10 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
+import jakarta.enterprise.context.ApplicationScoped;
 
-public class CustomerServiceImpl {
+@ApplicationScoped
+public class CustomerServiceImpl implements CustomerService{
     private WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
     private static final String BASE_URI = "http://localhost:8080/Pract1_Aitor_Xavi/rest/api/v1/";
@@ -38,7 +40,24 @@ public class CustomerServiceImpl {
         }
         return null;
     }
-    
+    public Customer findUserByEmail(String email){
+        Response response = webTarget.path(email)
+                .request(MediaType.APPLICATION_JSON)
+                .get();
+        if (response.getStatus() == 200) {
+            return response.readEntity(Customer.class);
+        }
+        return null;
+    }
+    public Customer findUserByUsername(String username){
+        Response response = webTarget.path("/username/"+username)
+                .request(MediaType.APPLICATION_JSON)
+                .get();
+        if (response.getStatus() == 200) {
+            return response.readEntity(Customer.class);
+        }
+        return null;
+    }
     public void updateCustomer(int id, Customer updatedCustomer){
         Response response = webTarget
             .queryParam("id", id)
