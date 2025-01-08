@@ -35,27 +35,23 @@
 
 </head>
 <body>
-	<div class="container">
-		<div class="col-md-offset-2 col-md-7">
-                        <div class="text-center">
-                            <img class="mb-4" src="<c:url value="/resources/img/ETSEcentrat.png" />" alt="" width="134" height="92" />
-                        </div>
-			<h1>Gràcies per registrar-te!</h1>
-			<hr />
+    <div class="container">
+        <div class="col-md-offset-2 col-md-7">
+            <h1>Gràcies per registrar-te!</h1>
+            <hr />
                         <p class="text-md-start">
                             Ara pots gaudir dels nostres articles més famosos, i dels articles privats!
                         </p>
-			<table class="table table-striped table-bordered">
-				<tr>
-					<td><b>Username </b>: ${user.credenciales.username}</td>
-				</tr>
-				<tr>
-					<td><b>Email </b>: ${user.email}</td>
-				</tr>
-			</table>
-                        <a class="btn btn-sm btn-info text-white" href="<c:url value="/Web/Articles" />">Go Back</a>
-		</div>
-	</div>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td><b>Username </b>: ${user.credenciales.username}</td>
+                </tr>
+                <tr>
+                    <td><b>Email </b>: ${user.email}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
         <div>
             <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">

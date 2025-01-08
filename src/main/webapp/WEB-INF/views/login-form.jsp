@@ -1,25 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="es_ES" />
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 <!-- FontAwesome -->
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"/>
+
+<style>
+        .volver-btn {
+            background-color: #2a6edf; /* Color azul */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Bordes redondeados */
+            padding: 10px 20px; /* Espaciado interno */
+            font-size: 16px; /* Tamaño del texto */
+            font-weight: bold; /* Texto en negrita */
+            cursor: pointer; /* Cambia el cursor al pasar por encima */
+            text-align: center; /* Centrado del texto */
+            position: absolute; /* Posicionamiento absoluto */
+            right: 20px; /* Separación del lado derecho */
+            bottom: 20px; /* Separación de la parte inferior */
+        }
+        
+        .volver-btn:hover {
+            background-color: #1a4fb8; /* Color más oscuro al pasar el ratón */
+        }
+        
+</style>
 </head>
 <body>
 	<div class="container">
 		<div class="col-md-offset-2 col-md-7">
-			<h2 class="text-center">Iniciar Sesi�n</h2>
+			<h2 class="text-center">Iniciar Sesion</h2>
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">Login</div>
@@ -37,7 +61,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Campo para la contrase�a -->
+                                            <!-- Campo para la contraseña -->
                                             <div class="form-group">
                                                 <label for="password" class="col-md-3 control-label">Password</label>
                                                 <div class="col-md-9">
@@ -46,7 +70,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Bot�n de Login -->
+                                            <!-- Botón de Login -->
                                             <div class="form-group">
                                                 <div class="col-md-offset-3 col-md-9">
                                                     <input type="submit" value="Login" class="btn btn-primary" />
@@ -73,7 +97,7 @@
                                             </div>
                                         </div>
                                         <script>
-                                            // Mostrar el modal de error cuando se carga la p�gina
+                                            // Mostrar el modal de error cuando se carga la página
                                             $('#errorModal').modal('show');
                                         </script>
                                         </c:if>
@@ -110,5 +134,10 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+        <div>
+            <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">
+            Volver
+            </button>
+        </div>
 </body>
 </html>

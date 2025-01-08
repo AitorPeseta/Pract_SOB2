@@ -80,7 +80,7 @@ public class LoginFormController {
             models.put("customer",user);
             log.log(Level.INFO, "Redirecting to the success page.");
             attempts.reset();
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(); 
             session.setAttribute("username", user.getCredenciales().getUsername());
             return "login-success.jsp";
             
