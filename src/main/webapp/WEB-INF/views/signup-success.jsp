@@ -25,10 +25,7 @@
                         </p>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td><b>First Name </b>: ${user.firstName}</td>
-				</tr>
-				<tr>
-					<td><b>Last Name </b>: ${user.lastName}</td>
+					<td><b>Username </b>: ${user.credenciales.username}</td>
 				</tr>
 				<tr>
 					<td><b>Email </b>: ${user.email}</td>

@@ -4,6 +4,7 @@
  */
 package deim.urv.cat.homework2.service;
 
+import deim.urv.cat.homework2.controller.CustomerForm;
 import deim.urv.cat.homework2.model.Customer;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
@@ -63,5 +64,11 @@ public class CustomerServiceImpl implements CustomerService{
             .queryParam("id", id)
             .request(MediaType.APPLICATION_JSON)
             .put(Entity.entity(updatedCustomer, MediaType.APPLICATION_JSON));
+    }
+    public boolean addUser(CustomerForm customer) {
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(customer, MediaType.APPLICATION_JSON), 
+                    Response.class);
+        return response.getStatus() == 201;
     }
 }

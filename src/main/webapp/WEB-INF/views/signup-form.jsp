@@ -28,24 +28,22 @@
 					<form action="${mvc.uri('sign-up')}" class="form-horizontal" method="POST">
                                                 <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
 						<div class="form-group">
-							<label for="firstname" class="col-md-3 control-label">First
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="firstName" value="${user.firstName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="lastname" class="col-md-3 control-label">Last
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="lastName" value="${user.lastName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="email" class="col-md-3 control-label">Email</label>
 							<div class="col-md-9">
                                                             <input type="text" name="email" value="${user.email}" class="form-control" />
 							</div>
+						</div>
+                                                <div class="form-group">
+							<label for="username" class="col-md-3 control-label">Username</label>
+							<div class="col-md-9">
+                                                            <input type="text" name="username" value="${user.credenciales.username}" class="form-control" />
+							</div>
+						</div>
+                                                <div class="form-group">
+                                                        <label for="password" class="col-md-3 control-label">Password</label>
+                                                        <div class="col-md-9">
+                                                            <input type="password" name="password" value="${user.credenciales.password}" class="form-control" />
+                                                        </div>
 						</div>
 						<div class="form-group">
 							<!-- Button -->
