@@ -120,4 +120,20 @@ public class ArticleServiceImpl implements ArticleService{
         return false;
     }
     
+    @Override
+    public boolean isPrivate(String id){
+        Response response = webTarget.path("/isprivate/"+id)
+                .request()
+                .get();
+        switch (response.getStatus()) {
+            case 200:
+                return false;
+            case 403:
+                return true;
+            default:
+                break;
+        }
+        return true;
+    }
+    
 }

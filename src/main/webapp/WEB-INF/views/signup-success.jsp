@@ -54,9 +54,19 @@
     </div>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
         <div>
-            <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">
-            Volver
+            <button class="volver-btn" onclick="goBackTwoPages()">
+                    Volver
             </button>
         </div>
+
+        <script>
+            function goBackTwoPages() {
+                if (window.history.length > 2) {
+                    window.history.go(-2);
+                } else {
+                    window.location.href = '/Homework2/Web/Articles';
+                }
+            }
+        </script>
 </body>
 </html>

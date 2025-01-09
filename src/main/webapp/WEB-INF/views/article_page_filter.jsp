@@ -12,10 +12,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos Recientes</title>
-    <link rel="stylesheet" href="../resources/css/styles.css">
-    <link rel="stylesheet" href="../resources/css/stylesini.css">
-    
     <style>
+
+        /* Aplica a todos los enlaces que contengan elementos con clase "article-title" */
+        a {
+            text-decoration: none; /* Elimina el subrayado de todos los enlaces */
+            color: inherit; /* Usa el color del texto del contenedor */
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #343a40;
+        }
+
+        .article-details {
+            flex: 1;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: row;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-left {
+            flex: 3;
+            padding-right: 15px;
+        }
+
+        .article-right {
+            flex: 1;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .article-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            flex: 1; 
+            margin-right: 15px;
+        }
+
+        .article-title {
+            font-size: 1.5em;
+            margin: 0;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        /* Opcional: Cambia el color al pasar el mouse */
+        a:hover {
+            color: #3498db; /* Cambia el color cuando pases el mouse */
+            text-decoration: none; /* Asegúrate de que no reaparezca el subrayado */
+        }
+
+        /* Si quieres aplicar específicamente solo a los títulos */
+        a .article-title {
+            text-decoration: none; /* Elimina el subrayado del texto del título */
+            color: inherit; /* Asegúrate de que hereda el color */
+        }
+
+        /* Al pasar el mouse por el título */
+        a:hover .article-title {
+            color: #3498db; /* Cambia el color al pasar el mouse */
+            text-decoration: none; /* Sin subrayado */
+        }
+
+        .article-meta {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 10px;
+            padding: 4px;
+        }
+
+        .article-visits {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-left: 2px; 
+        }
+
+        .article-visits-left{
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 50%;
+            padding:10px;
+        }
+
+        .article-content {
+            font-size: 1em;
+            color: #495057;
+            margin: 0;
+            margin-top: 10px; 
+        }
+
+        .element-left,
+        .element-right {
+            display: flex;
+            align-items: center; 
+        }
+
+        .element-left {
+            margin-right: 10px;
+            font-size: 0.9em; 
+            color: #495057;
+        }
+
+        .article-username-left {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 50%;
+            padding:6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #343a40;
+            color: #fff;
+            margin-top: 20px;
+        }
+        
         .content-wrapper {
             display: flex; /* Distribuye los elementos en fila */
             flex-direction: row; /* Coloca los elementos horizontalmente */
@@ -89,6 +237,53 @@
             background-color: #0056b3;
         }
 
+        /* Barra de Login */
+        .login-bar {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between; /* Divide espacio entre el texto y los botones */
+            align-items: center;
+            font-family: Arial, sans-serif; /* Cambiar fuente */
+        }
+
+        .login-bar .login-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .login-bar .login-buttons {
+            display: flex;
+            gap: 10px; /* Espaciado entre botones */
+        }
+
+        .login-bar button {
+            padding: 5px 10px;
+            font-family: Arial, sans-serif; /* Fuente consistente */
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Título principal */
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Estilo para las opciones de tópicos */
+        .volver-btn {
+            margin-top: 10px;
+        }
 
     </style>
     
@@ -154,6 +349,9 @@
 
                     <button type="submit">Aplicar Filtros</button>
                 </form>
+                <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">
+                    Quitar Filtros
+                </button>
             </aside>
 
             <!-- Contenedor de artículos -->

@@ -64,7 +64,7 @@ public class ArticleForm implements Serializable{
     @NotNull(message = "Topics must not be null")
     @Size(min = 1, message = "At least one topic must be provided")
     @FormParam("topics")
-    private List<Topic> topics;
+    private List<Topic> topic;
 
     // Getters and Setters with `fixNull` for safe access
     
@@ -141,11 +141,11 @@ public class ArticleForm implements Serializable{
     }
 
     public List<Topic> getTopics() {
-        return topics;
+        return topic;
     }
 
     public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+        this.topic = topics;
     }
 
     private String fixNull(String in) {

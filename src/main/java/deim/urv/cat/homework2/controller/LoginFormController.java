@@ -14,6 +14,7 @@ import jakarta.mvc.binding.BindingResult;
 import jakarta.mvc.binding.ParamError;
 import jakarta.mvc.security.CsrfProtected;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.BeanParam;
@@ -48,7 +49,8 @@ public class LoginFormController {
     @CsrfProtected
     public String logIn(@FormParam("credenciales.username") String username,
                     @FormParam("credenciales.password") String password,
-                    @Context HttpServletRequest request) {
+                    @Context HttpServletRequest request, 
+                    @Context HttpServletResponse response) {
         
         if (bindingResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation failed!");

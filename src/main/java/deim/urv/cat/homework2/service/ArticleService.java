@@ -12,4 +12,5 @@ public interface ArticleService {
     public Article findArticleById(String id) throws Exception;
     public boolean deleteArticle(String id) throws Exception;
     public boolean createArticle(Article article) throws Exception;
+    public boolean isPrivate(String id);
 }
