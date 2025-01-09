@@ -55,24 +55,28 @@
     </div>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
         <div>
-            <button class="volver-btn" onclick="goBackTwoPages()">
+            <button class="volver-btn" onclick="goBack()">
                     Volver
             </button>
         </div>
 
         <script>
-            function goBackTwoPages() {
-                if (window.history.length > 2) {
-                    window.addEventListener('pageshow', function(event) {
-                        if (event.persisted) {
-                            window.location.reload();
-                        }
-                    });
-                    window.history.go(-2);
+            function goBack() {
+                // Recuperamos la URL de la página anterior
+                var previousPage = sessionStorage.getItem('previousPage');
+
+                // Si la URL existe, redirigimos al usuario a esa página
+                if (previousPage) {
+                    window.location.href = previousPage;
                 } else {
-                    window.location.href = '/Homework2/Web/Articles';
+                    // Si no hay página anterior, redirigimos al home o a una página por defecto
+                    window.location.href = "/Homework2/Web/Articles"; // O la URL que desees
                 }
+
+                // Limpiar el valor de sessionStorage después de la redirección
+                sessionStorage.removeItem('previousPage');
             }
         </script>
+
 </body>
 </html>

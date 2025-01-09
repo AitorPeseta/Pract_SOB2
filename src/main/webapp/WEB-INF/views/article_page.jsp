@@ -117,10 +117,10 @@
                 </c:when>
                 <c:otherwise>
                     <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
-                        <button type="submit">Iniciar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Iniciar Sesión</button>
                     </form>
                     <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
-                        <button type="submit">Registrarse</button>
+                        <button type="submit" onclick="guardaPrevious()">Registrarse</button>
                     </form>
                 </c:otherwise>
             </c:choose>
@@ -198,5 +198,12 @@
             <p>&copy; 2025 Aitor&Xavi</p>
         </footer>
     </div>
+    <script>
+        function guardaPrevious() {
+            // Guardamos la URL actual de la página
+            sessionStorage.setItem('previousPage', window.location.href);
+
+        }
+    </script>
 </body>
 </html>

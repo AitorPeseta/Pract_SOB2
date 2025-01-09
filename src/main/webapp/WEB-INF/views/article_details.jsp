@@ -267,10 +267,18 @@
         </div>
     </div>
     <div>
-        <button class="volver-btn" onclick="location.href='/Homework2/Web/Articles'">
+        <button class="volver-btn" onclick="goBackTwoPages()">
         Volver
         </button>
     </div>
-        
+    <script>
+        function goBackTwoPages() {
+            if (window.history.length > 1) {
+                window.history.go(-1);
+            } else {
+                window.location.href = '/Homework2/Web/Articles';
+            }
+        }
+    </script>
 </body>
 </html>
