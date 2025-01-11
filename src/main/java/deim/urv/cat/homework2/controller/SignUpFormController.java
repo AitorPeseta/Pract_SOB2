@@ -44,13 +44,30 @@ public class SignUpFormController {
     }    
     
     @POST
-    @UriRef("sign-up")
-    @CsrfProtected
-    public String signUp(@Valid @FormParam("username") String username,
-                    @FormParam("password") String password,
-                    @FormParam("email") String email,
-                    @Context HttpServletRequest request) {
-        
+@UriRef("sign-up")
+@CsrfProtected
+public String signUp(@Valid @FormParam("username") String username,
+                @FormParam("password") String password,
+                @FormParam("email") String email,
+                @Context HttpServletRequest request) {
+    
+        // Validación de email
+        if (email == null || !email.matches("^[^@\\s]+@gmail\\.com$")) {
+            models.put("message", "Invalid email! Must be a valid non-empty Gmail address.");
+            return "signup-form.jsp";
+        }
+
+        // Validación de username y password
+        if (username == null || username.trim().isEmpty()) {
+            models.put("message", "Username cannot be empty!");
+            return "signup-form.jsp";
+        }
+
+        if (password == null || password.trim().isEmpty()) {
+            models.put("message", "Password cannot be empty!");
+            return "signup-form.jsp";
+        }
+
         if (bindingResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation failed!");
             bindingResult.getAllErrors()
@@ -62,21 +79,20 @@ public class SignUpFormController {
             models.put("errors", alert);
             return "signup-form.jsp";
         }
-        
-        if(attempts.hasExceededMaxAttempts()) {
+
+        if (attempts.hasExceededMaxAttempts()) {
             return "signup-form.jsp";
         }
-       
+
         Customer user = service.findUserByUsername(username);
         if (user != null) {
-            // Try again
             log.log(Level.WARNING, "A user with this username {0} already exists.", user.getCredenciales().getUsername());
             models.put("message", "A user with this username already exists!");
             attempts.increment();
             return "signup-form.jsp";
         } else {
             user = service.findUserByEmail(email);
-            if(user != null){
+            if (user != null) {
                 log.log(Level.WARNING, "A user with this e-mail address {0} already exists.", user.getEmail());
                 models.put("message", "A user with this e-mail address already exists!");
                 attempts.increment();
@@ -88,7 +104,7 @@ public class SignUpFormController {
                 creds.setPassword(password);
                 creds.setUsername(username);
                 cust.setCredenciales(creds);
-                                
+
                 log.log(Level.INFO, "Redirecting to the success page.");
                 models.put("user", cust);
                 service.addUser(cust);
@@ -98,6 +114,5 @@ public class SignUpFormController {
                 return "signup-success.jsp";
             }
         }
-        
-    } 
+    }
 }

@@ -22,17 +22,17 @@ public class LogoutController {
 
     @POST
     public String invalidate() {
-        // Invalidate HTTP Session
+        // Invalidar la sesión HTTP
         HttpSession session = request.getSession();
-        Enumeration<String> attributes = request.getSession().getAttributeNames();
+        Enumeration<String> attributes = session.getAttributeNames();
         while (attributes.hasMoreElements()) {
             String key = attributes.nextElement();
-            Object obj  = session.getAttribute(key);
+            Object obj = session.getAttribute(key);
             log.log(Level.INFO, "Session attribute {0}:{1}", 
-                    new Object [] { key, obj });
+                    new Object[] { key, obj });
         }
         session.invalidate();
-        return "redirect:/Articles"; 
+        return "redirect:/Articles"; // Redirigir a una página predeterminada si no hay Referer
     }
-
 }
+

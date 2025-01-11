@@ -94,6 +94,15 @@
     
 </head>
 <body>
+    <script>
+        // Recargar la página después de retroceder si es necesario
+        if (sessionStorage.getItem('reloadAfterGoBack')) {
+            sessionStorage.removeItem('reloadAfterGoBack');  // Limpiar la bandera
+            setTimeout(() => {
+                window.location.reload();  // Recargar después de una ligera pausa
+            }, 300);  // Tiempo ajustable según necesidad
+        }
+    </script>
     <div class="login-bar">
         <!-- Texto de la izquierda -->
         <div class="login-text">
@@ -112,7 +121,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.username}">
                     <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
-                        <button type="submit">Cerrar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
@@ -170,7 +179,7 @@
                                 
                                 <form action="/Homework2/Web/Articles/article-details" class="form-horizontal" method="POST">
                                     <input type="hidden" name="id" value="${article.id}" />
-                                    <div class="article-title" style="cursor: pointer;" onclick="this.closest('form').submit();">
+                                    <div class="article-title" style="cursor: pointer;" onclick="guardaPrevious(); this.closest('form').submit();">
                                         ${article.title}
                                     </div>
                                 </form>

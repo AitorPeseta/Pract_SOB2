@@ -289,6 +289,13 @@
     
 </head>
 <body>
+    <script>
+         // Verifica la bandera
+            if (sessionStorage.getItem('reloadAfterGoBack')) {
+                sessionStorage.removeItem('reloadAfterGoBack'); // Limpia la bandera
+                window.location.reload(); // Recarga la página actual
+            }
+    </script>
     <div class="login-bar">
         <!-- Texto de la izquierda -->
         <div class="login-text">
@@ -307,15 +314,15 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.username}">
                     <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
-                        <button type="submit">Cerrar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
-                        <button type="submit">Iniciar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Iniciar Sesión</button>
                     </form>
                     <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
-                        <button type="submit">Registrarse</button>
+                        <button type="submit" onclick="guardaPrevious()">Registrarse</button>
                     </form>
                 </c:otherwise>
             </c:choose>
@@ -368,7 +375,7 @@
                                 
                                 <form action="/Homework2/Web/Articles/article-details" class="form-horizontal" method="POST">
                                     <input type="hidden" name="id" value="${article.id}" />
-                                    <div class="article-title" style="cursor: pointer;" onclick="this.closest('form').submit();">
+                                    <div class="article-title" style="cursor: pointer;" onclick="guardaPrevious(); this.closest('form').submit();">
                                         ${article.title}
                                     </div>
                                 </form>
@@ -396,5 +403,12 @@
             <p>&copy; 2025 Aitor&Xavi</p>
         </footer>
     </div>
+    <script>
+        function guardaPrevious() {
+            // Guardamos la URL actual de la página
+            sessionStorage.setItem('previousPage', window.location.href);
+
+        }
+    </script>
 </body>
 </html>

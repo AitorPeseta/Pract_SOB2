@@ -107,18 +107,34 @@
 	</div>
         <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
         <div>
-            <button class="volver-btn" onclick="goBackTwoPages()">
+            <button class="volver-btn" onclick="goBack()">
                     Volver
             </button>
         </div>
 
         <script>
-            function goBackTwoPages() {
-                if (window.history.length > 1) {
-                    window.history.go(-1);
+            function goBack() {
+                // Recuperamos la URL de la página anterior
+                var previousPage = sessionStorage.getItem('previousPage');
+                let path = new URL(sessionStorage.getItem('previousPage')).pathname;
+                var numErrors = Number(${num_errors}); // Número de errores (puedes ajustar esta lógica según tu backend)
+                var stepsBack = (numErrors > 0) ? -(1 + numErrors) : -1;
+
+                // Si la URL existe, redirigimos al usuario a esa página
+                if (previousPage) {
+                    if(path === "/Homework2/Web/Articles")
+                        window.location.href = previousPage;
+                    else{
+                        // Retroceder en el historial
+                        window.history.go(stepsBack);
+                    }
                 } else {
-                    window.location.href = '/Homework2/Web/Articles';
+                    // Si no hay página anterior, redirigimos al home o a una página por defecto
+                    window.location.href = "/Homework2/Web/Articles"; // O la URL que desees
                 }
+
+                // Limpiar el valor de sessionStorage después de la redirección
+                sessionStorage.removeItem('previousPage');
             }
         </script>
 </body>

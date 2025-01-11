@@ -39,6 +39,8 @@ public class LoginFormController {
     @Inject AlertMessage flashMessage;
     @Inject SignUpAttempts attempts;
     
+    public static int num_errors=0;
+    
     @GET
     public String showForm() {
         return "login-form.jsp"; // Injects CRSF token
@@ -60,11 +62,17 @@ public class LoginFormController {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
             log.log(Level.WARNING, "Data binding for loginFormController failed.");
+            num_errors++;
+            models.put("num_errors", num_errors);
             models.put("errors", alert);
+            System.out.print("Error failed:" + num_errors);
             return "login-form.jsp";
         }
         
         if(attempts.hasExceededMaxAttempts()) {
+            num_errors++;
+            models.put("num_errors", num_errors);
+            System.out.print("Error attmeps:" + num_errors);
             return "login-form.jsp";
         }
         Customer user;
@@ -76,6 +84,9 @@ public class LoginFormController {
             AlertMessage alert = AlertMessage.danger("Username not registered!");
             log.log(Level.WARNING, "Username not found!");
             models.put("errors", alert);
+            num_errors++;
+            models.put("num_errors", num_errors);
+            System.out.print("Error user null:" + num_errors);
             return "login-form.jsp";
         }
         if (user.getCredenciales().getPassword().equals(password)) {
@@ -84,12 +95,17 @@ public class LoginFormController {
             attempts.reset();
             HttpSession session = request.getSession(); 
             session.setAttribute("username", user.getCredenciales().getUsername());
+            models.put("num_errors", num_errors);
+            num_errors=0;
             return "login-success.jsp";
             
         } else {
             AlertMessage alert = AlertMessage.danger("Password is incorrect.");
             log.log(Level.WARNING, "Username not found!");
             models.put("errors", alert);
+            num_errors++;
+            models.put("num_errors", num_errors);
+            System.out.print("Error user creden:" + num_errors);
             return "login-form.jsp";
         }
         

@@ -165,11 +165,15 @@
         .login-bar .login-text {
             font-size: 14px;
             color: #333;
+            position: relative; /* o absolute, según el caso */
+            left: 15px; /* A 50 píxeles de la izquierda */
         }
 
         .login-bar .login-buttons {
             display: flex;
             gap: 10px; /* Espaciado entre botones */
+            position: relative; /* o absolute, según el caso */
+            right: 15px; /* A 50 píxeles de la izquierda */
         }
 
         .login-bar button {
@@ -192,6 +196,13 @@
     </style>
 </head>
 <body>
+    <script>
+         // Verifica la bandera
+            if (sessionStorage.getItem('reloadAfterGoBack')) {
+                sessionStorage.removeItem('reloadAfterGoBack'); // Limpia la bandera
+                window.location.reload(); // Recarga la página actual
+            }
+    </script>
     <div class="login-bar">
         <!-- Texto de la izquierda -->
         <div class="login-text">
@@ -210,15 +221,15 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.username}">
                     <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
-                        <button type="submit">Cerrar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
-                        <button type="submit">Iniciar Sesión</button>
+                        <button type="submit" onclick="guardaPrevious()">Iniciar Sesión</button>
                     </form>
                     <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
-                        <button type="submit">Registrarse</button>
+                        <button type="submit" onclick="guardaPrevious()">Registrarse</button>
                     </form>
                 </c:otherwise>
             </c:choose>
@@ -267,17 +278,20 @@
         </div>
     </div>
     <div>
-        <button class="volver-btn" onclick="goBackTwoPages()">
+        <button class="volver-btn" onclick="goBackPages()">
         Volver
         </button>
     </div>
     <script>
-        function goBackTwoPages() {
-            if (window.history.length > 1) {
-                window.history.go(-1);
-            } else {
+        function goBackPages() {
                 window.location.href = '/Homework2/Web/Articles';
-            }
+        }
+    </script>
+    <script>
+        function guardaPrevious() {
+            // Guardamos la URL actual de la página
+            sessionStorage.setItem('previousPage', window.location.href);
+            sessionStorage.setItem('privat', ${article.isPublic});
         }
     </script>
 </body>

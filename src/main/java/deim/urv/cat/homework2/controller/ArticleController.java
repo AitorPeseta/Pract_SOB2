@@ -201,8 +201,8 @@ public class ArticleController {
             log.log(Level.WARNING, "Los parámetros que nos has proporcionado son incorrectos.");
             return "error400.jsp"; // Mostrar página de error
         } catch (Exception403 e) {
-            return "login-form.jsp";
-        } 
+            return "redirect:/Login";
+        }
 
         log.log(Level.WARNING, "Entrando a la página del artículo de forma exitosa");
         // Devolver la vista JSP de la página del artículo
