@@ -52,11 +52,16 @@ public String signUp(@Valid @FormParam("username") String username,
                 @Context HttpServletRequest request) {
     
         // Validación de email
-        if (email == null || !email.matches("^[^@\\s]+@gmail\\.com$")) {
-            models.put("message", "Invalid email! Must be a valid non-empty Gmail address.");
+        if (email == null || !email.matches("^[^@\\s]+@.*\\..*$")) {
+            models.put("message", "Invalid email! Must be a valid non-empty Email address.");
             return "signup-form.jsp";
         }
 
+        if ((username == null || username.trim().isEmpty()) && (password == null || password.trim().isEmpty())) {
+            models.put("message", "Username and Password cannot be empty!");
+            return "signup-form.jsp";
+        }
+        
         // Validación de username y password
         if (username == null || username.trim().isEmpty()) {
             models.put("message", "Username cannot be empty!");

@@ -258,6 +258,9 @@
                         </div>
                     </div>
                     <div class="right">
+                        <c:if test="${!article.isPublic}">
+                            <img class="article-date-left" src="<c:url value="/resources/img/brillar-estrella.png" />" />
+                        </c:if>
                         <img class="article-visits-left" src="<c:url value="/resources/img/foto.png" />" />
                         <span>${article.views}</span>
                         <span><fmt:formatDate value="${article.publishedDate}" pattern="MMM dd, yyyy" /></span>

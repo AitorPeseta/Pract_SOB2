@@ -36,6 +36,22 @@
             background-color: #1a4fb8; /* Color más oscuro al pasar el ratón */
         }
         
+        .submit-btn input[type="submit"] {
+            background-color: #007bff; /* Azul */
+            color: white; /* Texto en blanco */
+            border: none; /* Sin borde */
+            padding: 5px 10px; /* Tamaño del botón */
+            border-radius: 5px; /* Bordes redondeados opcionales */
+            cursor: pointer; /* Manita al pasar el cursor */
+            font-size: 16px; /* Tamaño del texto */
+            margin-left: 175px; /* Separación desde la izquierda */
+        }
+
+        /* Opcional: Cambiar color al pasar el cursor */
+        .submit-btn input[type="submit"]:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+        }
+        
 </style>
 
 </head>
@@ -70,7 +86,7 @@
 						</div>
 						<div class="form-group">
 							<!-- Button -->
-							<div class="col-md-offset-3 col-md-9">
+							<div class="submit-btn">
 								<input type="submit" value="Submit" />
 							</div>
 						</div>
