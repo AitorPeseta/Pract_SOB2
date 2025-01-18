@@ -120,15 +120,15 @@
         <div class="login-buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.username}">
-                    <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/Logout" method="post" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/Login" method="get" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Iniciar Sesión</button>
                     </form>
-                    <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/SignUp" method="get" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Registrarse</button>
                     </form>
                 </c:otherwise>
@@ -143,7 +143,7 @@
             <!-- Contenedor de filtraje -->
             <aside class="filter-container">
                 <h2>Filtrar</h2>
-                <form action="/Homework2/Web/Articles/article-filter" method="POST">
+                <form action="/Pract_SOB2/Web/Articles/article-filter" method="POST">
                     <!-- Filtro por tópicos -->
                     <div class="filter-section">
                         <h3>Tópicos</h3>
@@ -177,7 +177,7 @@
                             </div>
                             <div class="article-details">
                                 
-                                <form action="/Homework2/Web/Articles/article-details" class="form-horizontal" method="POST">
+                                <form action="/Pract_SOB2/Web/Articles/article-details" class="form-horizontal" method="POST">
                                     <input type="hidden" name="id" value="${article.id}" />
                                     <div class="article-title" style="cursor: pointer;" onclick="guardaPrevious(); this.closest('form').submit();">
                                         ${article.title}

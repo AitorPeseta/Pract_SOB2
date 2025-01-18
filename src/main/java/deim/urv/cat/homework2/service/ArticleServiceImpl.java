@@ -64,17 +64,18 @@ public class ArticleServiceImpl implements ArticleService{
         
         HttpSession session = request.getSession(); 
         String encoded = null, encodedPassword=null;
-      
+        System.out.println("entro al metodo");
         if(session.getAttribute("password") != null && session.getAttribute("username") != null){
             encoded = session.getAttribute("username").toString() + ":" + session.getAttribute("password").toString();
             encodedPassword = Base64.getEncoder().encodeToString(encoded.getBytes());
         }
-                
+        System.out.println("cosicas: "+encoded+" "+encodedPassword);        
         Response response = webTarget.path(id)
                                      .request(MediaType.APPLICATION_JSON)
                                      .header("Authorization", encodedPassword)
                                      .get();
-                       
+        
+        System.out.println("status post peticion "+response.getStatus());               
         switch (response.getStatus()) {
             case 200:
                 return response.readEntity(Article.class);
@@ -82,6 +83,8 @@ public class ArticleServiceImpl implements ArticleService{
                 throw new Exception404("");
             case 400:
                 throw new Exception400("");
+            case 401:
+                throw new Exception401("");
             default:
                 break;
         }

@@ -69,7 +69,7 @@
 
                 // Si la URL existe, redirigimos al usuario a esa página
                 if (previousPage) {
-                    if(path === "/Homework2/Web/Articles")
+                    if(path === "/Pract_SOB2/Web/Articles")
                         window.location.href = previousPage;
                     else{
                         sessionStorage.setItem('reloadAfterGoBack', 'true');
@@ -78,11 +78,11 @@
                     }
                 } else {
                     // Si no hay página anterior, redirigimos al home o a una página por defecto
-                    window.location.href = "/Homework2/Web/Articles"; // O la URL que desees
+                    window.location.href = "/Pract_SOB2/Web/Articles"; // O la URL que desees
                 }
 
                 // Limpiar el valor de sessionStorage después de la redirección
-                if(path !== "/Homework2/Web/Articles/article-details") sessionStorage.removeItem('previousPage');
+                if(path !== "/Pract_SOB2/Web/Articles/article-details") sessionStorage.removeItem('previousPage');
 
             }
         </script>

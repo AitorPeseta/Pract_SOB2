@@ -165,9 +165,7 @@ public class ArticleController {
     public String showArticleDetails(@FormParam("id") String articleId, @Context HttpServletRequest request) throws Exception {
         try {
             
-            HttpSession session = request.getSession();
             
-            String username = (String) session.getAttribute("username");
            
             // Verificar si el parámetro ID no es nulo
             if (articleId == null) {
@@ -175,34 +173,32 @@ public class ArticleController {
             }
                
             // Llamar al servicio para obtener el artículo por su ID
-            if (articleService.isPrivate(articleId) && username == null){
-                throw new Exception403("");
-            } else {
-                Article article = articleService.findArticleById(articleId, request);
-                // Comprobar si el artículo existe
-                if (article == null) {
-                    // Manejar el caso en que el artículo no exista (opcional)
-                    throw new Exception404("");
-                }
-
-                // Poner el artículo en el modelo para pasarlo al JSP
-                models.put("article", article);
+            
+            Article article = articleService.findArticleById(articleId, request);       //Comprobamos 
+            // Comprobar si el artículo existe
+            if (article == null) {
+                // Manejar el caso en que el artículo no exista (opcional)
+                throw new Exception404("");
             }
+
+            // Poner el artículo en el modelo para pasarlo al JSP
+            models.put("article", article);
             
 
-        } catch (Exception404 e) {
+        /*} catch (Exception404 e) {
             // Manejo de errores: agregar un mensaje de error al modelo
             models.put("error", "No se ha encontrado el artículo.");
             log.log(Level.WARNING, "No se ha encontrado el artículo..");
-            return "error404.jsp"; // Mostrar página de error
+            return "error404.jsp"; // Mostrar página de error*/
         } catch (Exception400 e) {
             // Manejo de errores: agregar un mensaje de error al modelo
             models.put("error", "Los parámetros que nos has proporcionado son incorrectos.");
             log.log(Level.WARNING, "Los parámetros que nos has proporcionado son incorrectos.");
             return "error400.jsp"; // Mostrar página de error
-        } catch (Exception403 e) {
+        } catch (Exception403 | Exception401 e) {
             return "redirect:/Login";
         }
+        //401 articulo privado
 
         log.log(Level.WARNING, "Entrando a la página del artículo de forma exitosa");
         // Devolver la vista JSP de la página del artículo

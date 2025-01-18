@@ -220,15 +220,15 @@
         <div class="login-buttons">
             <c:choose>
                 <c:when test="${not empty sessionScope.username}">
-                    <form action="/Homework2/Web/Logout" method="post" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/Logout" method="post" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Cerrar Sesión</button>
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form action="/Homework2/Web/Login" method="get" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/Login" method="get" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Iniciar Sesión</button>
                     </form>
-                    <form action="/Homework2/Web/SignUp" method="get" style="margin: 0;">
+                    <form action="/Pract_SOB2/Web/SignUp" method="get" style="margin: 0;">
                         <button type="submit" onclick="guardaPrevious()">Registrarse</button>
                     </form>
                 </c:otherwise>
