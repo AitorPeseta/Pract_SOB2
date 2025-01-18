@@ -46,7 +46,7 @@ public class ArticleController {
 
     @GET
     @Path("/")
-    public String showArticlesPage() throws Exception {
+    public String showArticlesPage(@Context HttpServletRequest request) throws Exception {
         try {
             // Cargar los artículos (en este caso, el primer set de artículos)
             List<Article> articles = articleService.findArticleByTopicAuthor(null, null); // Vacío en lugar de null
@@ -100,7 +100,7 @@ public class ArticleController {
     @POST
     @Path("/article-filter")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String showArticlesFilter(@FormParam("topics") List<Integer> topics, @FormParam("author") String author) throws Exception {
+    public String showArticlesFilter(@FormParam("topics") List<Integer> topics, @FormParam("author") String author, @Context HttpServletRequest request) throws Exception {
         try {
             
             //Buscar id del autor
@@ -178,7 +178,7 @@ public class ArticleController {
             if (articleService.isPrivate(articleId) && username == null){
                 throw new Exception403("");
             } else {
-                Article article = articleService.findArticleById(articleId);
+                Article article = articleService.findArticleById(articleId, request);
                 // Comprobar si el artículo existe
                 if (article == null) {
                     // Manejar el caso en que el artículo no exista (opcional)

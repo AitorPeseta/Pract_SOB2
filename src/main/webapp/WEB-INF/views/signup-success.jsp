@@ -82,7 +82,8 @@
                 }
 
                 // Limpiar el valor de sessionStorage después de la redirección
-                sessionStorage.removeItem('previousPage');
+                if(path !== "/Homework2/Web/Articles/article-details") sessionStorage.removeItem('previousPage');
+
             }
         </script>
 </body>

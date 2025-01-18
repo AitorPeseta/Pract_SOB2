@@ -9,6 +9,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.core.Context;
+import java.util.Base64;
 
 @ApplicationScoped
 public class CustomerServiceImpl implements CustomerService{
@@ -21,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService{
         webTarget = client.target(BASE_URI).path("customer");
     }
     public List<Customer> findAllCustomers(){
+        
         Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
         if (response.getStatus() == 200) {
             return response.readEntity(new GenericType<List<Customer>>() {});
@@ -28,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService{
         return null;
     }
     public Customer findCustomerById(String id){
+        
         Response response = webTarget
                 .queryParam("id")
                 .request(MediaType.APPLICATION_JSON)
@@ -38,6 +44,7 @@ public class CustomerServiceImpl implements CustomerService{
         return null;
     }
     public Customer findUserByEmail(String email){
+        
         Response response = webTarget.path(email)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
@@ -47,6 +54,7 @@ public class CustomerServiceImpl implements CustomerService{
         return null;
     }
     public Customer findUserByUsername(String username){
+        
         Response response = webTarget.path("/username/"+username)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
@@ -55,13 +63,21 @@ public class CustomerServiceImpl implements CustomerService{
         }
         return null;
     }
-    public void updateCustomer(int id, Customer updatedCustomer){
+    public void updateCustomer(int id, Customer updatedCustomer, @Context HttpServletRequest request){
+        HttpSession session = request.getSession(); 
+        String encodedPassword = null;
+        if(session.getAttribute("password") != null )
+           encodedPassword = Base64.getEncoder().encodeToString(session.getAttribute("password").toString().getBytes());
+        
+        
         Response response = webTarget
             .queryParam("id", id)
             .request(MediaType.APPLICATION_JSON)
+            .header("Authorization", encodedPassword)
             .put(Entity.entity(updatedCustomer, MediaType.APPLICATION_JSON));
     }
     public boolean addUser(CustomerForm customer) {
+       
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(customer, MediaType.APPLICATION_JSON), 
                     Response.class);

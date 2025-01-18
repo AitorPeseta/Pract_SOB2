@@ -95,6 +95,7 @@ public class LoginFormController {
             attempts.reset();
             HttpSession session = request.getSession(); 
             session.setAttribute("username", user.getCredenciales().getUsername());
+            session.setAttribute("password", user.getCredenciales().getPassword());
             models.put("num_errors", num_errors);
             num_errors=0;
             return "login-success.jsp";

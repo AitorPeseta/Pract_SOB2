@@ -287,7 +287,18 @@
     </div>
     <script>
         function goBackPages() {
-                window.location.href = '/Homework2/Web/Articles';
+            // Recuperamos la URL de la página anterior
+            var previousPage = sessionStorage.getItem('previousPage');
+            let path = new URL(sessionStorage.getItem('previousPage')).pathname;
+            var numErrors = Number(${num_errors}); // Número de errores (puedes ajustar esta lógica según tu backend)
+            var stepsBack = (numErrors > 0) ? -(2 + numErrors) : -2;
+
+            // Si la URL existe, redirigimos al usuario a esa página
+            if (previousPage) {
+                        window.history.go(-1);
+            }
+            // Limpiar el valor de sessionStorage después de la redirección
+            sessionStorage.removeItem('previousPage');
         }
     </script>
     <script>

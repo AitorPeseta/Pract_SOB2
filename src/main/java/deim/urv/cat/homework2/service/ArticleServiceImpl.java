@@ -2,12 +2,16 @@ package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.Article;
 import deim.urv.cat.homework2.exception.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.GenericType;
+import java.util.Base64;
 
 
 public class ArticleServiceImpl implements ArticleService{
@@ -56,11 +60,19 @@ public class ArticleServiceImpl implements ArticleService{
     }
     
     @Override
-    public Article findArticleById(String id) throws Exception {
+    public Article findArticleById(String id, @Context HttpServletRequest request) throws Exception {
         
-        
+        HttpSession session = request.getSession(); 
+        String encoded = null, encodedPassword=null;
+      
+        if(session.getAttribute("password") != null && session.getAttribute("username") != null){
+            encoded = session.getAttribute("username").toString() + ":" + session.getAttribute("password").toString();
+            encodedPassword = Base64.getEncoder().encodeToString(encoded.getBytes());
+        }
+                
         Response response = webTarget.path(id)
                                      .request(MediaType.APPLICATION_JSON)
+                                     .header("Authorization", encodedPassword)
                                      .get();
                        
         switch (response.getStatus()) {
@@ -78,10 +90,17 @@ public class ArticleServiceImpl implements ArticleService{
     }
     
     @Override
-    public boolean deleteArticle(String id) throws Exception{
+    public boolean deleteArticle(String id, @Context HttpServletRequest request) throws Exception{
          
+        HttpSession session = request.getSession(); 
+        String encodedPassword = null;
+        if(session.getAttribute("password") != null )
+           encodedPassword = Base64.getEncoder().encodeToString(session.getAttribute("password").toString().getBytes());
+        
+        
         Response response = webTarget.path(id)
                                      .request(MediaType.APPLICATION_JSON)
+                                     .header("Authorization", encodedPassword)
                                      .delete();
         
         switch (response.getStatus()) {
@@ -100,8 +119,16 @@ public class ArticleServiceImpl implements ArticleService{
     }
     
     @Override
-    public boolean createArticle(Article article) throws Exception{
+    public boolean createArticle(Article article, @Context HttpServletRequest request) throws Exception{
+        
+        HttpSession session = request.getSession(); 
+        String encodedPassword = null;
+        if(session.getAttribute("password") != null )
+           encodedPassword = Base64.getEncoder().encodeToString(session.getAttribute("password").toString().getBytes());
+        
+        
         Response response = webTarget.request(MediaType.APPLICATION_JSON)
+               .header("Authorization", encodedPassword)
                .post(Entity.entity(article, MediaType.APPLICATION_JSON), 
                     Response.class);
         
