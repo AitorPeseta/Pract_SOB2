@@ -115,6 +115,7 @@ public String signUp(@Valid @FormParam("username") String username,
                 service.addUser(cust);
                 HttpSession session = request.getSession();
                 session.setAttribute("username", cust.getCredenciales().getUsername());
+                session.setAttribute("password", cust.getCredenciales().getPassword());
                 attempts.reset();
                 return "signup-success.jsp";
             }

@@ -407,6 +407,7 @@
         function guardaPrevious() {
             // Guardamos la URL actual de la página
             sessionStorage.setItem('previousPage', window.location.href);
+            sessionStorage.setItem('previousPage2', window.location.href);
 
         }
     </script>

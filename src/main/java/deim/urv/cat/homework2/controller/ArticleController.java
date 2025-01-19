@@ -165,8 +165,6 @@ public class ArticleController {
     public String showArticleDetails(@FormParam("id") String articleId, @Context HttpServletRequest request) throws Exception {
         try {
             
-            
-           
             // Verificar si el parámetro ID no es nulo
             if (articleId == null) {
                 throw new Exception400(""); // Error 400: Solicitud incorrecta
@@ -185,18 +183,20 @@ public class ArticleController {
             models.put("article", article);
             
 
-        /*} catch (Exception404 e) {
+        } catch (Exception404 e) {
             // Manejo de errores: agregar un mensaje de error al modelo
             models.put("error", "No se ha encontrado el artículo.");
             log.log(Level.WARNING, "No se ha encontrado el artículo..");
-            return "error404.jsp"; // Mostrar página de error*/
+            return "error404.jsp"; // Mostrar página de error
         } catch (Exception400 e) {
             // Manejo de errores: agregar un mensaje de error al modelo
             models.put("error", "Los parámetros que nos has proporcionado son incorrectos.");
             log.log(Level.WARNING, "Los parámetros que nos has proporcionado son incorrectos.");
             return "error400.jsp"; // Mostrar página de error
         } catch (Exception403 | Exception401 e) {
+            
             return "redirect:/Login";
+            
         }
         //401 articulo privado
 

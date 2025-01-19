@@ -288,19 +288,25 @@
     <script>
         function goBackPages() {
             // Recuperamos la URL de la página anterior
-            var previousPage = sessionStorage.getItem('previousPage');
-            let path = new URL(sessionStorage.getItem('previousPage')).pathname;
-            var numErrors = Number(${num_errors}); // Número de errores (puedes ajustar esta lógica según tu backend)
-            var stepsBack = (numErrors > 0) ? -(2 + numErrors) : -2;
-
-            // Si la URL existe, redirigimos al usuario a esa página
-            if (previousPage) {
+            var previousPage2 = sessionStorage.getItem('previousPage2');
+            let path = new URL(sessionStorage.getItem('previousPage2')).pathname;
+           
+            if (previousPage2) {
+                    if(path !== "/Pract_SOB2/Web/Articles/Login" && path !== "/Homework2/Web/Articles/SignUp")
+                        window.location.href = path;
+                    else{
+                        sessionStorage.setItem('reloadAfterGoBack', 'true');
+                        // Retroceder en el historial
                         window.history.go(-1);
-            }
+                    }
+                } else {
+                    // Si no hay página anterior, redirigimos al home o a una página por defecto
+                    window.location.href = "/Homework2/Web/Articles"; // O la URL que desees
+                }
             // Limpiar el valor de sessionStorage después de la redirección
-            sessionStorage.removeItem('previousPage');
-        }
-    </script>
+            sessionStorage.removeItem('previousPage2');
+        }
+    </script>
     <script>
         function guardaPrevious() {
             // Guardamos la URL actual de la página
