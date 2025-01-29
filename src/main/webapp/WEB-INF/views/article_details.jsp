@@ -291,18 +291,19 @@
             var previousPage2 = sessionStorage.getItem('previousPage2');
             let path = new URL(sessionStorage.getItem('previousPage2')).pathname;
            
-            if (previousPage2) {
-                    if(path !== "/Pract_SOB2/Web/Articles/Login" && path !== "/Homework2/Web/Articles/SignUp")
-                        window.location.href = path;
-                    else{
-                        sessionStorage.setItem('reloadAfterGoBack', 'true');
-                        // Retroceder en el historial
-                        window.history.go(-1);
-                    }
+            if (previousPage2 && path !== "/Pract_SOB2/Web/Articles/article-filter") {
+                if (path !== "/Pract_SOB2/Web/Articles/Login" && path !== "/Pract_SOB2/Web/Articles/SignUp") {
+                    window.location.href = path;
                 } else {
-                    // Si no hay página anterior, redirigimos al home o a una página por defecto
-                    window.location.href = "/Homework2/Web/Articles"; // O la URL que desees
+                    sessionStorage.setItem('reloadAfterGoBack', 'true');
+                    // Retroceder en el historial
+                    window.history.go(-1);
                 }
+            } else {
+                // Si no hay página anterior o coincide con "/Pract_SOB2/Web/Articles/article-filter", redirigimos al home o a una página por defecto
+                window.location.href = "/Pract_SOB2/Web/Articles"; // O la URL que desees
+            }
+
             // Limpiar el valor de sessionStorage después de la redirección
             sessionStorage.removeItem('previousPage2');
         }
