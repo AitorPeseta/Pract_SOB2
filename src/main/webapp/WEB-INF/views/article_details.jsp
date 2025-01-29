@@ -291,10 +291,10 @@
             var previousPage2 = sessionStorage.getItem('previousPage2');
             let path = new URL(sessionStorage.getItem('previousPage2')).pathname;
            
-            if (previousPage2 && path !== "/Pract_SOB2/Web/Articles/article-filter") {
-                if (path !== "/Pract_SOB2/Web/Articles/Login" && path !== "/Pract_SOB2/Web/Articles/SignUp") {
-                    window.location.href = path;
-                } else {
+            if (previousPage2 /*&& path !== "/Pract_SOB2/Web/Articles/article-filter"*/) {
+                if(path === "/Pract_SOB2/Web/Articles")
+                        window.location.href = path;
+                else{
                     sessionStorage.setItem('reloadAfterGoBack', 'true');
                     // Retroceder en el historial
                     window.history.go(-1);
